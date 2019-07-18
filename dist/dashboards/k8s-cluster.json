@@ -354,7 +354,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum (node_filesystem_size{nodename=~\"$node\"}) - sum (node_filesystem_free{nodename=~\"$node\"})) / sum (node_filesystem_size{nodename=~\"$node\"})",
+          "expr": "(sum (node_filesystem_size_bytes{kubernetes_node=~\"$node\"}) - sum (node_filesystem_free_bytes{kubernetes_node=~\"$node\"})) / sum (node_filesystem_size_bytes{kubernetes_node=~\"$node\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -693,14 +693,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(node_filesystem_size{nodename=~\"$node\"}) - sum(node_filesystem_free{nodename=~\"$node\"})",
+          "expr": "sum(node_filesystem_size_bytes{kubernetes_node=~\"$node\"}) - sum(node_filesystem_free_bytes{kubernetes_node=~\"$node\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "usage",
           "refId": "A"
         },
         {
-          "expr": "sum(node_filesystem_size{nodename=~\"$node\"})",
+          "expr": "sum(node_filesystem_size_bytes{kubernetes_node=~\"$node\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "limit",
@@ -1234,7 +1234,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_node_status_condition{condition=\"OutOfDisk\", node=~\"$node\", status=\"true\"})",
+          "expr": "sum(kube_node_status_condition{condition=\"DiskPressure\", node=~\"$node\", status=\"true\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -2065,7 +2065,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(delta(kube_pod_container_status_restarts{namespace=\"kube-system\"}[30m]))",
+          "expr": "sum(delta(kube_pod_container_status_restarts_total{namespace=\"kube-system\"}[30m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
